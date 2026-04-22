@@ -11,16 +11,19 @@ const {
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    // runtimeConfig
+    // 빌드 안정성 날짜 (2026년 기준 최신으로 설정)
+    compatibilityDate: '2026-04-22',
     modules: [
         "@nuxtjs/tailwindcss",
         "nuxt-vuefire",
         "@pinia/nuxt",
         "@nuxtjs/google-fonts",
-        "@morev/vue-transitions/nuxt",
         "nuxt-icon",
     ],
     css: ["~/assets/css/main.scss"],
+   build: {
+        transpile: ["@morev/vue-transitions"]
+    },
     app: {
         head: {
             htmlAttrs: {
