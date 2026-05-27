@@ -9,7 +9,7 @@
         "postinstall": "nuxt prepare"
     },
     "devDependencies": {
-        "nuxt": "^3.4.1"
+        "nuxt": "^3.21.6"
     },
     "dependencies": {
         "@firebase/app-types": "^0.9.0",
@@ -31,9 +31,9 @@
     "overrides": {
         "vue": "latest"
     },
-	"pnpm":{
-		"overrides": {
-			"@tootallnate/once": ">=2.0.1"
-		}
-	}
+    "pnpm": {
+        "overrides": {
+            "@tootallnate/once": ">=2.0.1"
+        }
+    }
 }
