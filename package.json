@@ -30,5 +30,10 @@
     },
     "overrides": {
         "vue": "latest"
-    }
+    },
+	"pnpm":{
+		"overrides": {
+			"@tootallnate/once": ">=2.0.1"
+		}
+	}
 }
