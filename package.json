@@ -36,9 +36,10 @@
             "@tootallnate/once": ">=2.0.1",
             "ws": ">=8.20.1",
 			"protobufjs": ">=7.5.8",
-			 "undici": ">=6.24.0",
-			 "fast-xml-parser": ">=5.7.0",
-			 "uuid": ">=11.1.1"
+			"undici": ">=6.24.0",
+			"fast-xml-parser": ">=5.7.0",
+			"uuid": ">=11.1.1",
+			"brace-expansion": ">=5.0.6"
         }
     }
 }
