@@ -19,7 +19,7 @@
         "@pinia/nuxt": "^0.4.8",
         "@vue/composition-api": "^1.7.1",
         "canvas-confetti": "^1.6.0",
-        "firebase": "^9.19.1",
+        "firebase": "^10.14.1",
         "firebase-admin": "^11.6.0",
         "nuxt-icon": "^0.3.3",
         "nuxt-vuefire": "^0.1.6",
@@ -34,7 +34,7 @@
     "pnpm": {
         "overrides": {
             "@tootallnate/once": ">=2.0.1",
-			"ws": ">=8.20.1"
+            "ws": ">=8.20.1"
         }
     }
 }
