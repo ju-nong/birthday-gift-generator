@@ -34,7 +34,8 @@
     "pnpm": {
         "overrides": {
             "@tootallnate/once": ">=2.0.1",
-            "ws": ">=8.20.1"
+            "ws": ">=8.20.1",
+			"protobufjs": ">=7.5.8"
         }
     }
 }
