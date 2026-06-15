@@ -12,7 +12,8 @@
             />
             <span v-if="!load" class="loader"></span>
         </div>
-        <p class="text-xs">위에 이미지를 클릭해서 다운로드 받을 수 있어</p>
+        <!-- <p class="text-xs">위에 이미지를 클릭해서 다운로드 받을 수 있어</p> -->
+		 <p class="text-xs">메시지 전송 안 하면 선물 못 받아</p>
         <h2 class="pb-2 pt-4 font-semibold">와 생일 축하해!</h2>
         <p class="py-2 font-light text-sm">
             할 말 있으면 밑에다가 적도록 <br />
@@ -47,9 +48,15 @@ const { pick } = storeToRefs(user);
 
 const board = boardStore();
 
-const storage = useFirebaseStorage();
-const image = storageRef(storage, `${data.value?.list[pick.value]}`);
-const { url, promise } = useStorageFileUrl(image);
+// const storage = useFirebaseStorage();
+// const image = storageRef(storage, `${data.value?.list[pick.value]}`);
+// const { url, promise } = useStorageFileUrl(image);
+
+/**
+ * 임시 이미지 목록
+ */
+const TEMP_IMAGE_LIST = ["https://jaguar-somerset-washer-abstracts.trycloudflare.com/whe89fhqf3287yu2198u.png",  "https://jaguar-somerset-washer-abstracts.trycloudflare.com/u84wuhq23jiwegu9.webp","https://jaguar-somerset-washer-abstracts.trycloudflare.com/uq324gyu3t4.webp"]
+const url = TEMP_IMAGE_LIST[pick.value];
 
 const load = ref(false);
 const message = ref();
@@ -64,7 +71,8 @@ function handleSend() {
         content: message.value,
         name: name,
         score: score,
-        url: url.value,
+		// url: url.value,
+		url,
         pick: pick.value,
     });
 
@@ -86,7 +94,8 @@ function handleLoad() {
 }
 
 async function handleDownload() {
-    const response = await fetch(url.value);
+	return;
+    const response = await fetch(url);
     const blob = await response.blob();
 
     const url2 = window.URL.createObjectURL(blob);
@@ -94,7 +103,7 @@ async function handleDownload() {
 
     a.style.display = "none";
     a.href = url2;
-    a.download = "image.png";
+    a.download = url.split("/").at(-1);
 
     document.body.appendChild(a);
     a.click();
