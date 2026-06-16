@@ -1,114 +1,151 @@
 <template>
-    <h1 class="title flex justify-between">
-        방명록
+	<h1 class="title flex justify-between">
+		방명록
 
-        <NuxtLink to="/">
-            <Icon
-                name="ic:round-home"
-                size="1.5rem"
-                color="rgb(26, 136, 233)"
-            />
-        </NuxtLink>
-    </h1>
-    <div
-        v-if="load"
-        class="board-container flex gap-6 pt-6 flex-col"
-        :key="load"
-    >
-        <div v-for="(item, index) in boards" :key="index">
-            <h2>{{ index + 1 }}. {{ item.name }} {{ item.birthday }}</h2>
-            <h2>
-                {{ item.score === -1 ? "랜덤" : `시험 ${item.score}점` }}
-                <span>등급 : {{ config[item.pick] }}</span>
-            </h2>
-            <img :src="item.url" alt="" />
+		<NuxtLink to="/">
+			<Icon
+				name="ic:round-home"
+				size="1.5rem"
+				color="rgb(26, 136, 233)"
+			/>
+		</NuxtLink>
+	</h1>
 
-            <p>{{ item.content }}</p>
-        </div>
-    </div>
-    <div v-else class="flex justify-center items-center min-h-[400px]">
-        <span class="loader"></span>
-    </div>
+	<div
+		v-if="board.length > 0"
+		class="board-container flex gap-6 pt-6 flex-col"
+	>
+		<div
+			v-for="(
+				{ id, name, score, birthday, filename, content, grade },
+				boardItemIndex
+			) in board"
+			:key="id"
+		>
+			<h2>{{ boardItemIndex + 1 }}. {{ name }} {{ birthday }}</h2>
+			<h2>
+				{{ score === null ? "랜덤" : `시험 ${score}점` }}
+				<span>등급 : {{ grade }}</span>
+			</h2>
+			<SupabaseImg :filename="filename" />
+
+			<p>{{ content }}</p>
+		</div>
+	</div>
+
+	<ScrollTrigger
+		v-if="!done"
+		:is-loading="loading"
+		@on-trigger="handleTrigger"
+	/>
 </template>
 
-<script setup>
-import { boardStore } from "~/stores";
-import { storeToRefs } from "pinia";
-import { useFirebaseStorage, useStorageFileUrl } from "vuefire";
-import { ref as storageRef } from "firebase/storage";
+<script setup lang="ts">
+import type { BoardRow, BoardGetResponse } from "~/types/api/board";
 
-const board = boardStore();
-const { data } = storeToRefs(board);
+/**
+ * 방명록 목록
+ */
+const board = ref<BoardRow[]>([]);
 
-const boards = ref(data.value?.item);
-const storage = useFirebaseStorage();
+/**
+ * 현재 페이지
+ */
+let page = 0;
+/**
+ * 총 페이지 수
+ */
+let total = 1;
+/**
+ * 페이징 로딩 여부
+ */
+const loading = ref(false);
+/**
+ * 페이지 종료 여부
+ */
+const done = ref(false);
 
-const load = ref(false);
-const config = reactive(["하", "중", "상"]);
+/**
+ * 방명록 불러오기
+ */
+async function getBoard() {
+	try {
+		const { data } = await useFetch<BoardGetResponse>("/api/board", {
+			query: {
+				page,
+				size: 20,
+			},
+		});
 
-function updateBoard() {
-    board.setBoard();
+		if (data.value !== null) {
+			const {
+				list,
+				totalPage,
+				// totalCount,
+			} = data.value;
 
-    setTimeout(() => {
-        boards.value = board.getData?.item ?? [];
-        load.value = true;
-    }, 2000);
+			total = totalPage;
+
+			if (list.length < 1) {
+				done.value = true;
+			} else {
+				board.value = [...board.value, ...list];
+			}
+		}
+	} catch (error) {
+		console.error(error);
+	} finally {
+		loading.value = false;
+
+		if (total === page) {
+			done.value = true;
+		}
+	}
 }
 
-onBeforeMount(() => {
-    if (!data.value?.item.length) {
-        updateBoard();
-    } else {
-        load.value = true;
-    }
-});
+/**
+ * 페이징 트리거
+ */
+function handleTrigger() {
+	page = page + 1;
 
-// 스토리지 이미지 가져오는 함수
-// async function getImages() {
-//     for (let i = 0; i < boards.value.length; i++) {
-//         const image = storageRef(storage, boards.value[i].gift);
-//         const { url, promise } = useStorageFileUrl(image);
+	loading.value = true;
 
-//         await promise.value;
-
-//         boards.value[i].url = await url.value;
-//     }
-
-//     load.value = true;
-// }
+	getBoard();
+}
 </script>
 
 <style lang="scss">
 .board-container {
-    > div {
-        position: relative;
-        width: 100%;
-        padding: 1rem;
-        border-radius: 4px;
-        transition: transform 0.5s;
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
+	> div {
+		position: relative;
+		width: 100%;
+		padding: 1rem;
+		border-radius: 4px;
+		transition: transform 0.5s;
+		box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+		backdrop-filter: blur(4px);
+		-webkit-backdrop-filter: blur(4px);
 
-        &:hover {
-            transform: translateY(-5px);
-        }
+		&:hover {
+			transform: translateY(-5px);
+		}
 
-        > h2 {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+		> h2 {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 
-            > span {
-                color: #3e7def;
-                font-size: 1.05rem;
-                font-weight: bold;
-            }
-        }
+			> span {
+				color: #3e7def;
+				font-size: 1.05rem;
+				font-weight: bold;
+			}
+		}
 
-        > img {
-            margin: 1rem 0;
-        }
-    }
+		> img {
+			margin: 1rem 0;
+		}
+	}
 }
 </style>
