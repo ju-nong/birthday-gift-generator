@@ -28,14 +28,13 @@ export default defineNuxtConfig({
 	pinia: {
 		autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
 	},
-	googleFonts: {
-		families: {
-			"Nanum+Gothic": true,
-			download: true,
-		},
-	},
 	supabase: {
 		redirect: false,
 		types: "./types/database.types.ts",
+		cookieOptions: {
+			maxAge: 60 * 60 * 24 * 7,
+			secure: process.env.NODE_ENV === "production",
+			sameSite: "lax",
+		},
 	},
 });

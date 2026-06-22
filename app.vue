@@ -3,9 +3,9 @@
 		<NuxtPage />
 	</NuxtLayout>
 </template>
-<script setup>
+<script setup lang="ts">
 definePageMeta({
-	middleware: "check",
+	middleware: ["check"],
 });
 
 import { pageStore, toastStore } from "~/stores";

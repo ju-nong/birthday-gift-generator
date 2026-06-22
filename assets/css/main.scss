@@ -1,141 +1,176 @@
 @import url("https://cdn.jsdelivr.net/gh/toss/tossface/dist/tossface.css");
+@import url("https://googleapis.com");
 
 * {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	box-sizing: border-box;
 
-    font-family: "Nanum Gothic", Tossface;
+	font-family:
+		"Nanum Gothic",
+		// Tossface,
+		sans-serif;
 }
 
 body {
-    background: rgb(255, 255, 255);
-    background: linear-gradient(
-            0deg,
-            rgba(255, 255, 255, 1) 0%,
-            rgba(140, 184, 242, 1) 100%
-        )
-        no-repeat;
+	background: rgb(255, 255, 255);
+	background: linear-gradient(
+			0deg,
+			rgba(255, 255, 255, 1) 0%,
+			rgba(140, 184, 242, 1) 100%
+		)
+		no-repeat;
 
-    color: #444;
-    word-break: keep-all;
+	color: #444;
+	word-break: keep-all;
 
-    > div {
-        width: 100%;
-        height: 100%;
-    }
+	> div {
+		width: 100%;
+		height: 100%;
+	}
+}
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+	padding: 0.5rem;
+	margin-top: 0.5rem;
+
+	label {
+		padding-bottom: 0.5rem;
+
+		p {
+			padding: 0.5rem 0px;
+			font-weight: 600;
+		}
+
+		input {
+			width: 100%;
+			padding: 0.5rem;
+			border-radius: 0.5rem;
+			border: 1px solid #ccc;
+		}
+	}
+
+	button {
+		margin-top: 0.5rem;
+		box-shadow:
+			8px 8px 20px #d1e7f9,
+			-8px -8px 20px #fff;
+	}
 }
 
 .card-container {
-    backdrop-filter: blur(5px);
+	backdrop-filter: blur(5px);
 
-    background-color: rgba(255, 255, 255, 1);
+	background-color: rgba(255, 255, 255, 1);
 
-    border-radius: 26px;
+	border-radius: 26px;
 
-    box-shadow: 35px 35px 68px 0px rgba(145, 192, 255, 0.5),
-        inset -8px -8px 16px 0px rgba(145, 192, 255, 0.6),
-        inset 0px 11px 28px 0px rgb(255, 255, 255);
+	box-shadow:
+		35px 35px 68px 0px rgba(145, 192, 255, 0.5),
+		inset -8px -8px 16px 0px rgba(145, 192, 255, 0.6),
+		inset 0px 11px 28px 0px rgb(255, 255, 255);
 
-    .title {
-        color: #576d95;
-        font-size: 2vw;
-        font-weight: 600;
-    }
+	.title {
+		color: #576d95;
+		font-size: 2vw;
+		font-weight: 600;
+	}
 }
 
 .inline-box {
-    transition: transform 0.5s;
+	transition: transform 0.5s;
 
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
 
-    &:hover {
-        transform: translateY(-5px);
-    }
+	&:hover {
+		transform: translateY(-5px);
+	}
 }
 
 .primary-button {
-    width: 100%;
-    padding: 0.5rem;
+	width: 100%;
+	padding: 0.5rem;
 
-    font-weight: 600;
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    color: #fff;
-    border-radius: 0.5rem;
+	font-weight: 600;
+	font-size: 1.25rem;
+	line-height: 1.75rem;
+	color: #fff;
+	border-radius: 0.5rem;
 
-    text-align: center;
+	text-align: center;
 
-    cursor: pointer;
+	cursor: pointer;
 
-    background-color: rgb(26 136 233);
+	background-color: rgb(26 136 233);
 
-    &.small {
-        width: auto;
-        padding: 14px 60px;
-        font-size: 1rem;
-        line-height: 1.5rem;
-        box-shadow: 0px 6px 18px -5px rgb(26 136 233);
-    }
+	&.small {
+		width: auto;
+		padding: 14px 60px;
+		font-size: 1rem;
+		line-height: 1.5rem;
+		box-shadow: 0px 6px 18px -5px rgb(26 136 233);
+	}
 
-    &:hover {
-        background-color: rgb(29, 150, 255);
-    }
+	&:hover {
+		background-color: rgb(29, 150, 255);
+	}
 
-    &:active {
-        background-color: rgb(23, 122, 210);
-    }
+	&:active {
+		background-color: rgb(23, 122, 210);
+	}
 }
 
 .list-container {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    padding: 1rem 0;
+	padding: 1rem 0;
 
-    row-gap: 2rem;
-    li {
-        display: flex;
-        flex-direction: column;
+	row-gap: 2rem;
+	li {
+		display: flex;
+		flex-direction: column;
 
-        strong {
-            font-size: 16px;
-        }
-        span {
-            font-size: 14px;
-            color: #888;
-            margin: 0.5rem 0 0 0.5rem;
-        }
-    }
+		strong {
+			font-size: 16px;
+		}
+		span {
+			font-size: 14px;
+			color: #888;
+			margin: 0.5rem 0 0 0.5rem;
+		}
+	}
 }
 
 .loader {
-    width: 48px;
-    height: 48px;
-    border: 5px solid #444;
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
+	width: 48px;
+	height: 48px;
+	border: 5px solid #444;
+	border-bottom-color: transparent;
+	border-radius: 50%;
+	display: inline-block;
+	box-sizing: border-box;
+	animation: rotation 1s linear infinite;
 }
 
 @media screen and (max-width: 767px) {
-    .card-container {
-        .title {
-            font-size: 22px;
-        }
-    }
+	.card-container {
+		.title {
+			font-size: 22px;
+		}
+	}
 }
 
 @keyframes rotation {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }

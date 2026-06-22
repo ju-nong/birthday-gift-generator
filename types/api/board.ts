@@ -1,5 +1,5 @@
 import type { Database } from "~/types/database.types";
-import type { Pagination } from "~/types/api/common";
+import type { ApiResponse, Pagination } from "~/types/api/common";
 
 /**
  * 방명록 항목 타입
@@ -17,6 +17,8 @@ export interface BoardGetRequest {
 /**
  * 방명록 불러오기 응답
  */
-export interface BoardGetResponse extends Pagination {
-	list: BoardRow[];
-}
+export interface BoardGetResponse extends ApiResponse<
+	{
+		list: BoardRow[];
+	} & Pagination
+> {}

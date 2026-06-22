@@ -22,7 +22,7 @@
 			) in board"
 			:key="id"
 		>
-			<h2>{{ boardItemIndex + 1 }}. {{ name }} {{ birthday }}</h2>
+			<h2>{{ boardItemIndex + 1 }}. {{ name }} | {{ birthday }}</h2>
 			<h2>
 				{{ score === null ? "랜덤" : `시험 ${score}점` }}
 				<span>등급 : {{ grade }}</span>
@@ -49,9 +49,13 @@ import type { BoardRow, BoardGetResponse } from "~/types/api/board";
 const board = ref<BoardRow[]>([]);
 
 /**
+ * 페이지 크기
+ */
+const PAGE_SIZE = 20;
+/**
  * 현재 페이지
  */
-let page = 0;
+let page = 1;
 /**
  * 총 페이지 수
  */
@@ -65,24 +69,43 @@ const loading = ref(false);
  */
 const done = ref(false);
 
+// 초기 진입
+const { data: initialData } = await useFetch<BoardGetResponse>("/api/board", {
+	query: {
+		page,
+		size: PAGE_SIZE,
+	},
+});
+
+if (initialData.value !== null) {
+	const { list, totalPage } = initialData.value.data;
+
+	total = totalPage;
+	board.value = list;
+
+	if (total <= 1 || list.length < 1) {
+		done.value = true;
+	}
+}
+
 /**
  * 방명록 불러오기
  */
 async function getBoard() {
 	try {
-		const { data } = await useFetch<BoardGetResponse>("/api/board", {
+		const response = await $fetch<BoardGetResponse>("/api/board", {
 			query: {
 				page,
-				size: 20,
+				size: PAGE_SIZE,
 			},
 		});
 
-		if (data.value !== null) {
+		if (response !== null) {
 			const {
 				list,
 				totalPage,
-				// totalCount,
-			} = data.value;
+				// totalCount
+			} = response.data;
 
 			total = totalPage;
 

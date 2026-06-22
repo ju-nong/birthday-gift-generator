@@ -44,8 +44,12 @@ export default defineEventHandler(async (event): Promise<BoardGetResponse> => {
 
 	// 6. 페이징 결과 반환
 	return {
-		list: items || [],
-		totalPage: totalPages < 1 ? 1 : totalPages,
-		totalCount,
+		success: true,
+		message: "",
+		data: {
+			list: items || [],
+			totalPage: totalPages < 1 ? 1 : totalPages,
+			totalCount,
+		},
 	};
 });
