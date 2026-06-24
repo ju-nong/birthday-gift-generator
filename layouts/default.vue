@@ -1,13 +1,18 @@
 <template>
     <Head>
         <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB6HW5SW3W"></script>
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-QKFLJJ18PF"
+        ></script>
         <script>
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            
-            gtag('config', 'G-XB6HW5SW3W');
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+
+            gtag("config", "G-QKFLJJ18PF");
         </script>
         <Title>생일선물 뽑기</Title>
         <Meta name="theme-color" content="rgb(26 136 233)" />
