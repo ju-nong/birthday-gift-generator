@@ -1,5 +1,14 @@
 <template>
     <Head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB6HW5SW3W"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            
+            gtag('config', 'G-XB6HW5SW3W');
+        </script>
         <Title>생일선물 뽑기</Title>
         <Meta name="theme-color" content="rgb(26 136 233)" />
         <Meta name="description" content="이준용이 주는 생일선물!" />
