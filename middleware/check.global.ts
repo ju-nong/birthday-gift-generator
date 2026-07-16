@@ -1,6 +1,27 @@
-import { userStore, pageStore } from "~/stores";
+// import { userStore, pageStore } from "~/stores";
 
-export default defineNuxtRouteMiddleware((to) => {
+export default defineNuxtRouteMiddleware((to, _from) => {
+	const user = useSupabaseUser();
+
+	const { path } = to;
+
+	if (path === "/admin/login") {
+		if (user.value === null) {
+			return;
+		}
+
+		return navigateTo("/admin");
+	}
+
+	if (path.startsWith("/admin")) {
+		if (user.value === null) {
+			return navigateTo("/admin/login");
+		}
+	}
+
+	// if (to.path === "/admin/login") {
+	// 	return;
+	// }
 	// const page = pageStore();
 	// page.toggleLoad();
 	// if (to.name !== "index" && to.name !== "board") {

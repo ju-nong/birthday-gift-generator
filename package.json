@@ -1,52 +1,55 @@
 {
-    "name": "nuxt-app",
-    "private": true,
-    "scripts": {
-        "build": "nuxt build",
-        "dev": "nuxt dev --port 4000",
-        "generate": "nuxt generate",
-        "preview": "nuxt preview",
-        "postinstall": "nuxt prepare"
-    },
-    "devDependencies": {
-        "@nuxtjs/supabase": "2.0.9",
-        "nuxt": "^3.21.6"
-    },
-    "dependencies": {
-        "@firebase/app-types": "^0.9.0",
-        "@morev/vue-transitions": "^2.3.6",
-        "@nuxtjs/google-fonts": "^3.0.0",
-        "@nuxtjs/tailwindcss": "^6.7.2",
-        "@pinia/nuxt": "^0.4.8",
-        "@supabase/supabase-js": "^2.108.2",
-        "@vue/composition-api": "^1.7.1",
-        "canvas-confetti": "^1.6.0",
-        "firebase": "^10.14.1",
-        "firebase-admin": "^11.6.0",
-        "nuxt-icon": "^0.3.3",
-        "pinia": "^2.0.34",
-        "sass": "^1.70.0",
-        "sass-loader": "^13.2.2",
-        "vuefire": "^3.1.0"
-    },
-    "overrides": {
-        "vue": "latest"
-    },
-    "pnpm": {
-        "overrides": {
-            "@tootallnate/once": ">=2.0.1",
-            "ws": ">=8.20.1",
-            "protobufjs": ">=7.5.8",
-            "undici": ">=6.24.0",
-            "fast-xml-parser": ">=5.7.0",
-            "uuid": ">=11.1.1",
-            "brace-expansion": ">=5.0.6",
-            "fast-uri": ">=3.1.2",
-            "tmp": ">=0.2.6",
-            "protobufjs-cli": ">=1.2.1",
-            "esbuild": ">=0.28.1",
-            "@grpc/grpc-js": ">=1.9.16",
-            "shell-quote": ">=1.8.4"
-        }
-    }
+	"name": "nuxt-app",
+	"private": true,
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev --port 4000",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare"
+	},
+	"devDependencies": {
+		"@nuxtjs/supabase": "2.0.9",
+		"nuxt": "^3.21.6"
+	},
+	"dependencies": {
+		"@firebase/app-types": "^0.9.0",
+		"@morev/vue-transitions": "^2.3.6",
+		"@nuxtjs/google-fonts": "^3.0.0",
+		"@nuxtjs/tailwindcss": "^6.7.2",
+		"@pinia/nuxt": "^0.4.8",
+		"@supabase/supabase-js": "^2.108.2",
+		"@vue/composition-api": "^1.7.1",
+		"canvas-confetti": "^1.6.0",
+		"firebase": "^10.14.1",
+		"firebase-admin": "^11.6.0",
+		"nuxt-icon": "^0.3.3",
+		"pinia": "^2.0.34",
+		"sass": "^1.70.0",
+		"sass-loader": "^13.2.2",
+		"vuefire": "^3.1.0"
+	},
+	"overrides": {
+		"vue": "latest"
+	},
+	"pnpm": {
+		"overrides": {
+			"@tootallnate/once": ">=2.0.1",
+			"ws": ">=8.20.1",
+			"protobufjs": ">=7.5.8",
+			"undici": ">=6.24.0",
+			"fast-xml-parser": ">=5.7.0",
+			"uuid": ">=11.1.1",
+			"brace-expansion": ">=5.0.6",
+			"fast-uri": ">=3.1.2",
+			"tmp": ">=0.2.6",
+			"protobufjs-cli": ">=1.2.1",
+			"esbuild": ">=0.28.1",
+			"@grpc/grpc-js": ">=1.9.16",
+			"shell-quote": ">=1.8.4"
+		},
+		"onlyBuiltDependencies": [
+			"@morev/vue-transitions"
+		]
+	}
 }

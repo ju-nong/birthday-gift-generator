@@ -4,10 +4,6 @@
 	</NuxtLayout>
 </template>
 <script setup lang="ts">
-definePageMeta({
-	middleware: ["check"],
-});
-
 import { pageStore, toastStore } from "~/stores";
 import { storeToRefs } from "pinia";
 

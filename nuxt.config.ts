@@ -13,11 +13,9 @@ export default defineNuxtConfig({
 		"@nuxtjs/google-fonts",
 		"nuxt-icon",
 		"@nuxtjs/supabase",
+		"@morev/vue-transitions",
 	],
 	css: ["~/assets/css/main.scss"],
-	build: {
-		transpile: ["@morev/vue-transitions"],
-	},
 	app: {
 		head: {
 			htmlAttrs: {
